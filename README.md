@@ -2,6 +2,8 @@
 
 Python wrapper for the Mexc api
 
+[![Documentation Status](https://readthedocs.org/projects/py-mexc-api/badge/?version=latest)](https://py-mexc-api.readthedocs.io/en/latest/?badge=latest)
+
 [mexc docs](https://www.mexc.com/mexc-api)
 
 ## Usage
