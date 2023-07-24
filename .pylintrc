@@ -1,0 +1,8 @@
+[MAIN]
+disable=
+    too-many-public-methods,
+    too-many-arguments,
+    use-dict-literal,
+    too-many-instance-attributes,
+    no-name-in-module,
+    too-few-public-methods,
