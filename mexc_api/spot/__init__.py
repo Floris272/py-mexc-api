@@ -1,7 +1,11 @@
 """Defines the Spot class."""
 from ..common.api import Api
 from .endpoints._account import _Account
+from .endpoints._etf import _Etf
 from .endpoints._market import _Market
+from .endpoints._rebate import _Rebate
+from .endpoints._sub_account import _SubAccount
+from .endpoints._wallet import _Wallet
 
 
 class Spot:
@@ -12,3 +16,7 @@ class Spot:
 
         self.market = _Market(api)
         self.account = _Account(api)
+        self.subaccount = _SubAccount(api)
+        self.etf = _Etf(api)
+        self.rebate = _Rebate(api)
+        self.wallet = _Wallet(api)
