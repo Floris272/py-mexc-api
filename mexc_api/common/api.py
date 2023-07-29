@@ -1,6 +1,7 @@
 """Defines the Api class."""
 import hashlib
 import hmac
+from typing import Any
 
 from requests import Session
 
@@ -10,7 +11,7 @@ from .utils import get_timestamp
 
 
 class Api:
-    """Defines a base api class"""
+    """Defines a base api class."""
 
     def __init__(
         self,
@@ -31,7 +32,7 @@ class Api:
         )
 
     def get_query(self, params: dict) -> str:
-        """Returns a query string of all given parameters"""
+        """Returns a query string of all given parameters."""
         query = ""
         for key, value in params.items():
             query += f"{key}={value}&"
@@ -49,7 +50,7 @@ class Api:
 
     def send_request(
         self, method: Method, endpoint: str, params: dict, sign: bool = False
-    ) -> dict:
+    ) -> Any:
         """
         Sends a request with the given method to the given endpoint.
         RecvWindow, timestamp and signature are added to the parameters.

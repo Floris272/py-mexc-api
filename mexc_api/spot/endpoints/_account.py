@@ -1,10 +1,10 @@
-"""Defines the _Market class"""
+"""Defines the _Account class."""
 from mexc_api.common.api import Api
 from mexc_api.common.enums import Method, OrderType, Side
 
 
 class _Account:
-    """Defines all Market endpoints"""
+    """Defines all Account endpoints."""
 
     def __init__(self, api: Api) -> None:
         self.api = api
@@ -41,7 +41,7 @@ class _Account:
         price: str | None = None,
         client_order_id: str | None = None,
     ) -> dict:
-        """Creates a new order"""
+        """Creates a new order."""
         params = {
             "symbol": symbol.upper(),
             "side": side.value,
@@ -72,8 +72,8 @@ class _Account:
 
         return self.api.send_request(Method.DELETE, "/api/v3/order", params, True)
 
-    def cancel_open_orders(self, symbol: str) -> dict:
-        """Cancels all open orders"""
+    def cancel_open_orders(self, symbol: str) -> list:
+        """Cancels all open orders."""
         params = {
             "symbol": symbol.upper(),
         }
@@ -93,7 +93,7 @@ class _Account:
         }
         return self.api.send_request(Method.GET, "/api/v3/order", params, True)
 
-    def get_open_orders(self, symbol: str) -> dict:
+    def get_open_orders(self, symbol: str) -> list:
         """Returns all open orders for a symbol."""
         params = {
             "symbol": symbol.upper(),
@@ -106,7 +106,7 @@ class _Account:
         start_ms: int | None = None,
         end_ms: int | None = None,
         limit: int | None = None,
-    ) -> dict:
+    ) -> list:
         """Returns all orders for a symbol within the optional start and end timestamps."""
         params = {
             "symbol": symbol.upper(),
@@ -117,7 +117,7 @@ class _Account:
         return self.api.send_request(Method.GET, "/api/v3/allOrders", params, True)
 
     def get_account_info(self) -> dict:
-        """Returns the account info"""
+        """Returns the account info."""
         return self.api.send_request(Method.GET, "/api/v3/account", {}, True)
 
     def get_trades(
@@ -126,7 +126,7 @@ class _Account:
         start_ms: int | None = None,
         end_ms: int | None = None,
         limit: int | None = None,
-    ) -> dict:
+    ) -> list:
         """Returns all trades for a symbol within the optional start and end timestamps."""
         params = {
             "symbol": symbol.upper(),
@@ -155,15 +155,15 @@ class _Account:
         return response["listenKey"]
 
     def get_all_listen_keys(self) -> dict:
-        """Returns a listen key"""
+        """Returns a listen key."""
         return self.api.send_request(Method.GET, "/api/v3/userDataStream", {}, True)
 
     def keep_alive_listen_key(self, listen_key: str) -> None:
-        """Keeps the listen key alive"""
+        """Keeps the listen key alive."""
         params = {"listenKey": listen_key}
         self.api.send_request(Method.PUT, "/api/v3/userDataStream", params, True)
 
     def delete_listen_key(self, listen_key: str) -> None:
-        """deletes a listen key"""
+        """deletes a listen key."""
         params = {"listenKey": listen_key}
         self.api.send_request(Method.DELETE, "/api/v3/userDataStream", params, True)
