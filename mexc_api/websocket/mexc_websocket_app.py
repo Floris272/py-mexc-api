@@ -38,7 +38,9 @@ class MexcWebsocketApp(WebSocketApp):  # type: ignore[misc]
             on_close=on_close,
         )
 
-        Thread(target=self.run_forever).start()
+        Thread(
+            target=self.run_forever, kwargs={"reconnect": 1, "ping_interval": 20}
+        ).start()
 
         Thread(
             target=lambda: self._keep_alive(spot),
