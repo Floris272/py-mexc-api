@@ -20,9 +20,8 @@ release = '0.0.1'
 extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
 
-extensions = ['myst_parser', 'sphinx.ext.autodoc']
+extensions = ['myst_parser', 'sphinx.ext.autodoc', 'enum_tools.autoenum']
 
 
 # -- Options for HTML output -------------------------------------------------
