@@ -1,10 +1,10 @@
-"""Defines the _Market class"""
+"""Defines the _Market class."""
 from mexc_api.common.api import Api
 from mexc_api.common.enums import Interval, Method
 
 
 class _Market:
-    """Defines all Market endpoints"""
+    """Defines all Market endpoints."""
 
     def __init__(self, api: Api) -> None:
         self.api = api
@@ -44,7 +44,7 @@ class _Market:
         params = {"symbol": symbol.upper(), "limit": limit}
         return self.api.send_request(Method.GET, "/api/v3/depth", params)
 
-    def trades(self, symbol: str, limit: int | None = None) -> dict:
+    def trades(self, symbol: str, limit: int | None = None) -> list:
         """Returns the the recent of symbol."""
         params = {"symbol": symbol.upper(), "limit": limit}
         return self.api.send_request(Method.GET, "/api/v3/trades", params)
@@ -55,7 +55,7 @@ class _Market:
         start_ms: int | None = None,
         end_ms: int | None = None,
         limit: int | None = None,
-    ) -> dict:
+    ) -> list:
         """Returns the aggregate trades of symbol."""
         params = {
             "symbol": symbol.upper(),
@@ -72,7 +72,7 @@ class _Market:
         start_ms: int | None = None,
         end_ms: int | None = None,
         limit: int | None = None,
-    ) -> dict:
+    ) -> list:
         """
         Returns the klines of a symbol on the given interval
         between the optional start and end timestamps.
@@ -93,7 +93,7 @@ class _Market:
         }
         return self.api.send_request(Method.GET, "/api/v3/avgPrice", params)
 
-    def ticker_24h(self, symbol: str | None = None) -> dict:
+    def ticker_24h(self, symbol: str | None = None) -> list:
         """
         Returns ticker data from the last 24 hours.
         Data for all symbols will be sent if symbol was not given.
@@ -104,9 +104,10 @@ class _Market:
         params = {
             "symbol": symbol,
         }
-        return self.api.send_request(Method.GET, "/api/v3/ticker/24hr", params)
+        response = self.api.send_request(Method.GET, "/api/v3/ticker/24hr", params)
+        return [response] if isinstance(response, dict) else response
 
-    def ticker_price(self, symbol: str | None = None) -> str:
+    def ticker_price(self, symbol: str | None = None) -> list:
         """
         Returns the ticker price of a symbol.
         Prices of all symbols will be send if symbol was not given.
@@ -118,9 +119,9 @@ class _Market:
             "symbol": symbol,
         }
         response = self.api.send_request(Method.GET, "/api/v3/ticker/price", params)
-        return response["price"]
+        return [response] if isinstance(response, dict) else response
 
-    def ticker_book_price(self, symbol: str | None = None) -> dict:
+    def ticker_book_price(self, symbol: str | None = None) -> list:
         """
         Returns the best price/qty on the order book for a symbol.
         Data for all symbols will be sent if symbol was not given.
@@ -131,4 +132,7 @@ class _Market:
         params = {
             "symbol": symbol,
         }
-        return self.api.send_request(Method.GET, "/api/v3/ticker/bookTicker", params)
+        response = self.api.send_request(
+            Method.GET, "/api/v3/ticker/bookTicker", params
+        )
+        return [response] if isinstance(response, dict) else response

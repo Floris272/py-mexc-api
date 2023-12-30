@@ -1,4 +1,4 @@
-"""Defines utils used in the package"""
+"""Defines utils used in the package."""
 import time
 
 

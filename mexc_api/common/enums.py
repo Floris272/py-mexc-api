@@ -1,9 +1,9 @@
-"""This module stores the enums used by the mexc_api classes"""
+"""This module stores the enums used by the mexc_api classes."""
 from enum import Enum
 
 
 class Method(Enum):
-    """Method enum"""
+    """Method enum."""
 
     GET = "GET"
     POST = "POST"
@@ -41,14 +41,14 @@ class Interval(Enum):
 
 
 class Side(Enum):
-    """Side enum"""
+    """Side enum."""
 
     BUY = "BUY"
     SELL = "SELL"
 
 
 class OrderType(Enum):
-    """Order type enum"""
+    """Order type enum."""
 
     LIMIT = "LIMIT"
     MARKET = "MARKET"
@@ -59,7 +59,14 @@ class OrderType(Enum):
 
 
 class Action(Enum):
-    """Action type enum"""
+    """Action type enum."""
 
     SUBSCRIBE = "SUBSCRIPTION"
     UNSUBSCRIBE = "UNSUBSCRIPTION"
+
+
+class AccountType(Enum):
+    """account type enum."""
+
+    SPOT = "SPOT"
+    FUTURES = "FUTURES"

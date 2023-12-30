@@ -1,5 +1,5 @@
-"""Defines all exceptions"""
+"""Defines all exceptions."""
 
 
 class MexcAPIError(Exception):
-    """Default exception"""
+    """Default exception."""
